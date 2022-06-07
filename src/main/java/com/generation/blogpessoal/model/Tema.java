@@ -1,5 +1,7 @@
 package com.generation.blogpessoal.model;
 
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -25,7 +27,7 @@ public class Tema {
 
 	@OneToMany(mappedBy =  "tema", cascade = CascadeType.REMOVE)
 	@JsonIgnoreProperties("tema")
-	private String postagem;
+	private List<Postagem> postagem;
 
 	public long getId() {
 		return id;
@@ -35,13 +37,15 @@ public class Tema {
 		this.id = id;
 	}
 
-	public String getPostagem() {
+
+	public List<Postagem> getPostagem() {
 		return postagem;
 	}
-	public void setPostagem(String postagem) {
+
+	public void setPostagem(List<Postagem> postagem) {
 		this.postagem = postagem;
 	}
-    
+
 	public String getDescricao() {
 		return descricao;
 	}
