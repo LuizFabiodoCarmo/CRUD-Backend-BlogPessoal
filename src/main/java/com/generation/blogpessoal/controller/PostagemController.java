@@ -5,7 +5,6 @@ import java.util.Optional;
 
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.CrudRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -21,15 +20,19 @@ import org.springframework.web.server.ResponseStatusException;
 
 import com.generation.blogpessoal.model.Postagem;
 import com.generation.blogpessoal.repository.PostagemRepository;
+import com.generation.blogpessoal.repository.TemaRepository;
 
 @RestController
 @RequestMapping("/postagens")
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 public class PostagemController {
 
-	private static final CrudRepository<Postagem, Long> temaRepository = null;
 	@Autowired
 	private PostagemRepository postagemRepository;
+	
+	@Autowired
+	private TemaRepository temaRepository;
+	
 	
 	@GetMapping
 	public ResponseEntity<List<Postagem>> getAll(){
@@ -72,6 +75,7 @@ public class PostagemController {
   
      return ResponseEntity.status(HttpStatus.NOT_FOUND).build();	
     }	
+    
     @DeleteMapping("/{id}")
     public void deletePostagem(@PathVariable Long id) {
         Optional<Postagem>  resposta = postagemRepository.findById(id);

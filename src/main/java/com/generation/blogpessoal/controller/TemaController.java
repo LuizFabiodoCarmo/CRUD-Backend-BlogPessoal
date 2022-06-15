@@ -7,7 +7,6 @@ import java.util.Optional;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.CrudRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -18,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -29,9 +29,9 @@ import com.generation.blogpessoal.repository.TemaRepository;
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 public class TemaController {
 
-	private static final CrudRepository<Tema, Long> temaRepository = null;
+
 	@Autowired
-	private TemaRepository Repository;
+	private TemaRepository temaRepository;
 	
 	@GetMapping
 	public ResponseEntity<Iterable<Tema>> getAll(){
@@ -59,7 +59,7 @@ public class TemaController {
     
     @PutMapping
     	public ResponseEntity<Tema> putTema(@Valid @RequestBody Tema tema) {
-			
+    	
     		return temaRepository.findById(tema.getId())
     				.map(resposta -> {
     					return ResponseEntity.ok().body(temaRepository.save(tema));
@@ -67,20 +67,16 @@ public class TemaController {
     				.orElse(ResponseEntity.notFound().build());
 	
     }	
-    @DeleteMapping("/{id}")
-    public void deleteTema(@PathVariable Long id) {
-        Optional<Tema>  resposta = temaRepository.findById(id);
-    	if (resposta.isPresent()) {
-    	Repository.deleteById(id);
-    	
-    	} else {
-    		throw new ResponseStatusException(HttpStatus.NOT_FOUND);
-    			
-    	
-    	
-      }
-    }
     
-} 
-
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+	public void deleteTema(@PathVariable Long id) {
+		Optional <Tema> resposta = temaRepository.findById(id);
+		if (resposta.isPresent()) {
+			temaRepository.deleteById(id);
+		} else {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+		}
+    }
+}
 	
