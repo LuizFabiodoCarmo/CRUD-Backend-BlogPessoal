@@ -44,7 +44,7 @@ public class Usuario {
 	@JsonIgnoreProperties("usuario")
 	private List<Postagem> postagem;
 	
-	// Primeiro método Construtor
+	// Primeiro método Construtor para o JUnit
 	public Usuario(Long id, String nome, String usuario, String senha, String foto) {
 		this.id = id;
 		this.nome = nome;
@@ -53,7 +53,7 @@ public class Usuario {
 		this.foto = foto;
 	}
 
-	// Segundo método Construtor
+	// Segundo método Construtor para o JUnit
 	public Usuario() {	}
 
 	
