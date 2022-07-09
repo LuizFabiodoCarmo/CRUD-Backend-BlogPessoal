@@ -38,9 +38,11 @@ public class Usuario {
 	@Size(min = 8, message = "A senha precisa conter no mínimo 8 caracteres.")
 	private String senha;
 
-	private String foto;
+	private String foto; //já estava criado
+	
+	private String tipo; //Criado no front
 
-	@OneToMany(mappedBy = "usuario", cascade = CascadeType.REMOVE)
+	@OneToMany(mappedBy = "usuario", cascade = CascadeType.REMOVE) //já estava criado
 	@JsonIgnoreProperties("usuario")
 	private List<Postagem> postagem;
 	
@@ -104,6 +106,14 @@ public class Usuario {
 
 	public void setPostagem(List<Postagem> postagem) {
 		this.postagem = postagem;
+	}
+
+	public String getTipo() { //criado no front
+		return tipo;
+	}
+
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
 	}
 
 	

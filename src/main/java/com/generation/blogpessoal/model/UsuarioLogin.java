@@ -10,7 +10,9 @@ private Long id;
 	
 	private String senha;
 	
-	private String foto;
+	private String foto; //já criado
+	
+	private String tipo; //criado front
 	
 	private String token; 
 	
@@ -75,5 +77,15 @@ private Long id;
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public String getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
 	}	
+	
 }
+

@@ -54,12 +54,12 @@ public Optional<Usuario> atualizarUsuario(Usuario usuario){
     			if(compararSenhas(usuarioLogin.get().getSenha(), usuario.get().getSenha())) {
     				
     				usuarioLogin.get().setId(usuario.get().getId());
-    				usuarioLogin.get().setNome(usuario.get().getNome());
-    				usuarioLogin.get().setFoto(usuario.get().getFoto());
+    				usuarioLogin.get().setNome(usuario.get().getNome());//já estava criado
+    				usuarioLogin.get().setFoto(usuario.get().getFoto());//já estava criado
     				usuarioLogin.get()
-    				.setToken(gerarBasicToken(usuarioLogin.get().getUsuario(), usuarioLogin.get().getSenha()));
+    				.setToken(gerarBasicToken(usuarioLogin.get().getUsuario(), usuarioLogin.get().getSenha()));//já estava criado
     				usuarioLogin.get().setSenha(usuario.get().getSenha());
-    				
+    				usuarioLogin.get().setTipo(usuario.get().getTipo()); //criando front
     				return usuarioLogin;
     			}
     		
